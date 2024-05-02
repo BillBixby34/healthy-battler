@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Healthy Battler</title>
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+</head>
+<body>
+
+<!-- Jumbotron for Title -->
+<div class="jumbotron">
+    <h1 class="text-center">No Fear!</h1>
+    <h3 class="text-center">Battle to call yourself the healthiest!</h3>
+</div>
+
+<div class="container">
+
+    <div class="row">
+
+        <!-- Calculator Panel -->
+        <div class="col-lg-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Main Arena</h3>
+                </div>
+                    <div id="main-arena" class="panel-body">
+                        <div class = "row character-row"> <!-- will create 4 or 5 rows-->
+                            <h1>Characters here</h1>
+                        </div>
+                        <div class = "row enemies-row"> 
+                            <h1>Enemies here</h1>
+                        </div>
+                        <div class = "row fight-row"> 
+                            <h1>button here</h1>
+                            <button id="attack-button" class="btn btn-danger">Attack</button>
+                        </div>
+                        <div class = "row defender-row"> 
+                            <h1>Chosen enemy here</h1>
+                        </div>
+                    </div>
+           
+
+            </div> <!-- end of .main-arena -->
+        </div>
+
+        <!-- Result Panel -->
+        <div class="col-lg-4">
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Result</h3>
+                </div>
+                <div class="panel-body">
+                    <h1 id="player-health"></h1>
+                    <h1 id="enemy-health"></h1>
+                    <h1 id="winner"></h1>
+                    <hr>
+                    <h1 id="result"></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>
