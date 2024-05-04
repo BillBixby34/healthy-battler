@@ -1,0 +1,17 @@
+/* ThIs will be placehOlder for characters */
+  /* I want to center image in the box */
+  
+.box {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: #2db34a;
+    border: 2px solid black;
+  }
+
+
+
+
+  #attack-button {
+    width: 100px;
+  }
