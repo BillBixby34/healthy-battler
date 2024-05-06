@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
 
 //create variables
@@ -9,34 +8,54 @@ let characterObjArray = [
     {
         name: "snake",
         offense: 110,
-        defense: 90
+        defense: 90,
+        picSrc: ".../images/youngSnake.jpg"
     },
 
     {
         name: "ray",
         offense: 90,
-        defense: 100
+        defense: 100,
+        picSrc: "../images/MGRay.jpeg"
     },
 
     {
         name: "otacon",
         offense: 120,
-        defense: 105
+        defense: 105,
+        picSrc: "../images/Otacon.webp"
     },
 
     {
-        name: "raiden",
+        name: "solidus",
         offense: 140,
-        defense: 80
+        defense: 80,
+        picSrc: "../images/solidusSnake"
     }
 ];
 
+//loop through array and create boxes
+//drinkList
+let charRow = $(".character-row");
+
+for (i = 0; i < characterObjArray.length; i++){
+    let charBox = $("<figure>");
+    charBox.addClass("box box-color");
+    charBox.attr({"data-name":characterObjArray[i].name,"data-offense":characterObjArray[i].offense, "data-health":characterObjArray[i].defense });
+    //will see ifother attributes can be added
+    charBox.text(characterObjArray[i].name);
+    console.log(characterObjArray[i].name + " has " + characterObjArray[i].defense + " health points");
+    charRow.append(charBox);
+
+};
 //logic
 //once character chosen, 
 //character stays in chosen area,
 //characters not chosen go to enemy select area
-//enemy is selected,
-//and moves to selected enemy area
+//once enemy is selected,
+//and moved to selected enemy area,
+//the enemy select area is locked,
+//the battle can begin!
 
 //the character you choose has health, and attack strength
 //the enemy has health and "counter" attack strength
