@@ -1,57 +1,110 @@
 $(document).ready(function(){
 
-//create variables
+
 //will create boxes
-let charBox = $(".box");
+//let charBox = $(".box");
 //characters object
-let characterObjArray = [
-    {
+let characters = {
+    "snake" : {
         name: "snake",
-        offense: 110,
+        offense: 10,
         defense: 90,
-        picSrc: ".../images/youngSnake.jpg"
+        picSrc: "assets/images/youngSnake.jpg",
+        revenge: 15
     },
 
-    {
+    "ray" : {
         name: "ray",
-        offense: 90,
+        offense: 9,
         defense: 100,
-        picSrc: "../images/MGRay.jpeg"
+        picSrc: "assets/images/MGRay.jpeg",
+        revenge: 11
     },
 
-    {
+    "otacon" : {
         name: "otacon",
-        offense: 120,
-        defense: 105,
-        picSrc: "../images/Otacon.webp"
+        offense: 12,
+        defense: 85,
+        picSrc: "assets/images/Otacon.webp",
+        revenge: 3
     },
 
-    {
+    "solidus" : {
         name: "solidus",
-        offense: 140,
-        defense: 80,
-        picSrc: "../images/solidusSnake"
+        offense: 14,
+        defense: 89,
+        picSrc: "assets/images/solidusSnake.jpg",
+        revenge: 13
     }
-];
+};
+//create variables
+//chosen character
+let attacker;
+//enemy chosen
+let defender;
+//all characters not selected
+let combatants = [];
+//is enemy chosen?
+let enemyChoice = false;
 
 //loop through array and create boxes
 //drinkList
 let charRow = $(".character-row");
+//sets each character into arena
+function createChar (character, arena ){
+    //may change figure back to div
+    let charDiv = $("<div class='character' data-name='" + character.name + "'>");
+    console.log(charDiv);
+    let charName= $("<div class='character-name'>").text(character.name);
+    let charImage=$("<img alt='image' class='character-image'>").attr("src", character.picSrc);
+    let charHealth = $("<div class='character-health'>").text(character.defense);
+    charDiv.append(charName).append(charImage).append(charHealth);
+    $(arena).append(charDiv);
+}
 
-for (i = 0; i < characterObjArray.length; i++){
-    let charBox = $("<figure>");
-    charBox.addClass("box box-color");
-    charBox.attr({"data-name":characterObjArray[i].name,"data-offense":characterObjArray[i].offense, "data-health":characterObjArray[i].defense });
-    //will see ifother attributes can be added
-    charBox.text(characterObjArray[i].name);
-    console.log(characterObjArray[i].name + " has " + characterObjArray[i].defense + " health points");
-    charRow.append(charBox);
-
+//start game
+function startGame(){
+    for (var key in characters){
+        createChar(characters[key], ".character-row");
+    }
 };
-//logic
+
+startGame();
+// for (i = 0; i < characters.length; i++){
+//     //let charBox = $("<figure>");
+//     //will try to use figure first
+//     charBox.addClass("box box-color");
+//     charBox.attr({"data-name":characters[i].name,"data-offense":characters[i].offense, "data-health":characters[i].defense });
+//     //will see ifother attributes can be added
+//     charBox.text(characters[i].name);
+//     console.log(characters[i].name + " has " + characters[i].defense + " health points");
+//     if (playerChoice === false && enemyChoice === false) {
+//         charRow.append(charBox);
+//     } else if (playerChoice && enemyChoice === false){
+        
+//     }
+    // charRow.append(charBox);
+
+//}; //characterObjArray for-loop
+//execute yell function NOT FIXED
+
 //once character chosen, 
 //character stays in chosen area,
 //characters not chosen go to enemy select area
+// $(".box").on("click", function(){
+//     yourPick = $(this).attr("data-name");
+//     alert("You have clicked " + yourPick)
+//     for (let i = 0; i < characters.length; i++) {
+//         if (characters[i].name !== yourPick) {
+//             alert(characters[i].name + " isn't your pick")
+//          }
+//         //  else {
+            
+//         // }
+//     }
+// })
+//logic
+
 //once enemy is selected,
 //and moved to selected enemy area,
 //the enemy select area is locked,

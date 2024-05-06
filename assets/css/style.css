@@ -1,15 +1,34 @@
 /* ThIs will be placehOlder for characters */
   /* I want to center image in the box */
   
-.box {
-    position: relative;
+.character {
+    
+    display: inline-block;
     width: 150px;
     height: 150px;
     background: #2db34a;
-    border: 2px solid black;
+    border: 3px solid purple;
   }
 
+.character-name {
+    text-align: center;
+}
 
+.character-image {
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 5px;
+    margin-bottom: 4px;
+}
+img {
+    width: 150px;
+    height: 100px;
+    border-radius: 10px;
+  }
+.character-health {
+    text-align: center;
+}
 
 
   #attack-button {
