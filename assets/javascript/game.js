@@ -84,6 +84,7 @@ $(".character-row").on("click", ".character", function(){
             attacker = characters.yourPick;
             alert("You chose " + attacker);
            for (var key in characters){
+
             if (key !== yourPick){
                 combatants.push(characters[key]);
             }
@@ -92,14 +93,21 @@ $(".character-row").on("click", ".character", function(){
            //either make new row for selected or re-render yourPick
            $(".character-row").hide();
            console.log(combatants);
-           //need to move objects to new rows
-         }
-        });
+           for (var key in combatants){
+            createChar(combatants[key], ".enemies-row");
+        }   
+          
+        }
+            //need to move objects to new rows
+            
+});
 
-//log function
+//log function *Not working with object*
 function logFunction (item){
     console.log("We have logged " + item);
 };
+
+
     // for (let i = 0; i < characters.length; i++) {
     
     //     }
