@@ -37,6 +37,7 @@ let characters = {
         revenge: 13
     }
 };
+
 //create variables
 //chosen character
 let attacker;
@@ -50,7 +51,8 @@ let enemyChoice = false;
 //loop through array and create boxes
 //drinkList
 let charRow = $(".character-row");
-//sets each character into arena
+
+//create and sets each character into arena
 function createChar (character, arena ){
     //may change figure back to div
     let charDiv = $("<div class='character' data-name='" + character.name + "'>");
@@ -61,6 +63,8 @@ function createChar (character, arena ){
     charDiv.append(charName).append(charImage).append(charHealth);
     $(arena).append(charDiv);
 }
+//functions
+
 
 //start game
 function startGame(){
@@ -70,6 +74,35 @@ function startGame(){
 };
 
 startGame();
+//click function
+
+$(".character-row").on("click", ".character", function(){
+    yourPick = $(this).attr("data-name");
+    alert("You have clicked " + yourPick)
+        //if attacker not chosen
+        if (!attacker) {
+            attacker = characters.yourPick;
+            alert("You chose " + attacker);
+           for (var key in characters){
+            if (key !== yourPick){
+                combatants.push(characters[key]);
+            }
+           }
+           //hide characters in character-row
+           //either make new row for selected or re-render yourPick
+           $(".character-row").hide();
+           console.log(combatants);
+           //need to move objects to new rows
+         }
+        });
+
+//log function
+function logFunction (item){
+    console.log("We have logged " + item);
+};
+    // for (let i = 0; i < characters.length; i++) {
+    
+    //     }
 // for (i = 0; i < characters.length; i++){
 //     //let charBox = $("<figure>");
 //     //will try to use figure first
@@ -91,16 +124,7 @@ startGame();
 //once character chosen, 
 //character stays in chosen area,
 //characters not chosen go to enemy select area
-// $(".box").on("click", function(){
-//     yourPick = $(this).attr("data-name");
-//     alert("You have clicked " + yourPick)
-//     for (let i = 0; i < characters.length; i++) {
-//         if (characters[i].name !== yourPick) {
-//             alert(characters[i].name + " isn't your pick")
-//          }
-//         //  else {
-            
-//         // }
+
 //     }
 // })
 //logic
