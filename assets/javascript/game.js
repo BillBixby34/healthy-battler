@@ -40,7 +40,7 @@ let characters = {
 
 //create variables
 //chosen character
-let attacker;
+var attacker;
 //enemy chosen
 let defender;
 //all characters not selected
@@ -48,23 +48,26 @@ let combatants = [];
 //is enemy chosen?
 let enemyChoice = false;
 
-//loop through array and create boxes
-//drinkList
 let charRow = $(".character-row");
 
+//functions
 //create and sets each character into arena
 function createChar (character, arena ){
     //may change figure back to div
     let charDiv = $("<div class='character' data-name='" + character.name + "'>");
     console.log(charDiv);
     let charName= $("<div class='character-name'>").text(character.name);
-    let charImage=$("<img alt='image' class='character-image'>").attr("src", character.picSrc);
+    let charImage= $("<img alt='image' class='character-image'>").attr("src", character.picSrc);
     let charHealth = $("<div class='character-health'>").text(character.defense);
     charDiv.append(charName).append(charImage).append(charHealth);
     $(arena).append(charDiv);
 }
-//functions
 
+//function to fix scope problems
+function updateChar (charOb, arena){
+    $(arena).empty();
+    createChar(charOb, arena);
+};
 
 //start game
 function startGame(){
@@ -77,11 +80,11 @@ startGame();
 //click function
 
 $(".character-row").on("click", ".character", function(){
-    yourPick = $(this).attr("data-name");
+    var yourPick = $(this).attr("data-name");
     alert("You have clicked " + yourPick)
         //if attacker not chosen
         if (!attacker) {
-            attacker = characters.yourPick;
+            attacker = characters[yourPick];
             alert("You chose " + attacker);
            for (var key in characters){
 
@@ -93,9 +96,9 @@ $(".character-row").on("click", ".character", function(){
            //either make new row for selected or re-render yourPick
            $(".character-row").hide();
            console.log(combatants);
-           for (var key in combatants){
-            createChar(combatants[key], ".enemies-row");
-        }   
+           updateChar(attacker, ".player-row");
+           //below, createChar throws error
+            createChar(combatants[key], ".enemies-row");   
           
         }
             //need to move objects to new rows
@@ -106,6 +109,7 @@ $(".character-row").on("click", ".character", function(){
 function logFunction (item){
     console.log("We have logged " + item);
 };
+
 
 
     // for (let i = 0; i < characters.length; i++) {
