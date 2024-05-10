@@ -98,8 +98,8 @@ $(".character-row").on("click", ".character", function(){
            console.log(combatants);
            updateChar(attacker, ".player-row");
            //below, createChar throws error
-            createChar(combatants[key], ".enemies-row");   
-          
+            //createChar(combatants[key], ".enemies-row");   
+            enemyLoop(combatants);
         }
             //need to move objects to new rows
             
@@ -109,7 +109,11 @@ $(".character-row").on("click", ".character", function(){
 function logFunction (item){
     console.log("We have logged " + item);
 };
-
+let enemyLoop = function(arr){
+    for (let i = 0; i < arr.length; i++) {
+        createChar(arr[i], ".enemies-row");
+    }
+}
 
 
     // for (let i = 0; i < characters.length; i++) {

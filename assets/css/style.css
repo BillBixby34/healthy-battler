@@ -30,6 +30,10 @@ img {
     text-align: center;
 }
 
+.enemies-row .character {
+  background: red;
+  border: 2px solid black;
+}
 
   #attack-button {
     width: 100px;
