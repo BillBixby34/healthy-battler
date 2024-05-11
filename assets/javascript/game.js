@@ -42,11 +42,13 @@ let characters = {
 //chosen character
 var attacker;
 //enemy chosen
-let defender;
+var defender;
 //all characters not selected
 let combatants = [];
 //is enemy chosen?
 let enemyChoice = false;
+//setup to multiply for attack power
+let turnCounter = 1;
 
 let charRow = $(".character-row");
 
@@ -64,7 +66,7 @@ function createChar (character, arena ){
 }
 
 //function to fix scope problems
-function updateChar (charOb, arena){
+function updateChar(charOb, arena){
     $(arena).empty();
     createChar(charOb, arena);
 };
@@ -81,27 +83,23 @@ startGame();
 
 $(".character-row").on("click", ".character", function(){
     var yourPick = $(this).attr("data-name");
-    alert("You have clicked " + yourPick)
-        //if attacker not chosen
-        if (!attacker) {
-            attacker = characters[yourPick];
-            alert("You chose " + attacker);
-           for (var key in characters){
+    //if attacker not chosen
+    if (!attacker) {
+        attacker = characters[yourPick];
+        alert("You chose " + attacker);
+        for (var key in characters){
 
             if (key !== yourPick){
                 combatants.push(characters[key]);
             }
-           }
-           //hide characters in character-row
-           //either make new row for selected or re-render yourPick
-           $(".character-row").hide();
-           console.log(combatants);
-           updateChar(attacker, ".player-row");
-           //below, createChar throws error
-            //createChar(combatants[key], ".enemies-row");   
-            enemyLoop(combatants);
         }
-            //need to move objects to new rows
+
+        //hide characters in character-row
+        //either make new row for selected or re-render yourPick
+        $(".character-row").hide();
+        updateChar(attacker, ".player-row");  
+        enemyLoop(combatants);
+    }
             
 });
 
@@ -115,46 +113,29 @@ let enemyLoop = function(arr){
     }
 }
 
-
-    // for (let i = 0; i < characters.length; i++) {
-    
-    //     }
-// for (i = 0; i < characters.length; i++){
-//     //let charBox = $("<figure>");
-//     //will try to use figure first
-//     charBox.addClass("box box-color");
-//     charBox.attr({"data-name":characters[i].name,"data-offense":characters[i].offense, "data-health":characters[i].defense });
-//     //will see ifother attributes can be added
-//     charBox.text(characters[i].name);
-//     console.log(characters[i].name + " has " + characters[i].defense + " health points");
-//     if (playerChoice === false && enemyChoice === false) {
-//         charRow.append(charBox);
-//     } else if (playerChoice && enemyChoice === false){
-        
-//     }
-    // charRow.append(charBox);
-
-//}; //characterObjArray for-loop
-//execute yell function NOT FIXED
-
-//once character chosen, 
-//character stays in chosen area,
-//characters not chosen go to enemy select area
-
-//     }
-// })
 //logic
 
 //once enemy is selected,
-//and moved to selected enemy area,
-//the enemy select area is locked,
+$(".enemies-row").on("click", ".character", function(){
+    var enemyPick = $(this).attr("data-name");
+        //no children of element
+    if ($(".defender-row").children().length === 0){
+        defender = characters[enemyPick];
+        alert(defender + " should be moved");
+        updateChar(defender, ".defender-row");
+        $(this).remove();
+    }
+    
+    //$(".enemies-row").hide(defender);
+} ); //.enemies-row on "click"
+
+
 //the battle can begin!
 
 //the character you choose has health, and attack strength
 //the enemy has health and "counter" attack strength
 //when you attack, your attack power amount is the number subtracted from your opponents health,
 //after each attack, the enemy counters with their attack to player's health
-// CHALLENGE: Will try to use recursion to automate battles
 
 //Whichever gets to 0 health first, loses
 

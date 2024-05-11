@@ -35,6 +35,11 @@ img {
   border: 2px solid black;
 }
 
+.defender-row .character {
+  background: purple;
+  border: 3px solid green;
+}
+
   #attack-button {
     width: 100px;
   }
