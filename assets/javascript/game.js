@@ -123,19 +123,19 @@ $(document).ready(function() {
 
 
     //the battle can begin!
+    //need to increase turnCounter by1 each click
+     //Whichever gets to 0 health first, loses
+
     $("#attack-button").on("click", function(){
         console.log("defender starts with " + defender.defense);
         defender.defense -= attacker.offense * turnCounter;
         console.log("the defender has " + defender.defense + " health left");
+        attacker.defense -= defender.revenge;
+        console.log("your player has " + attacker.defense + " health left");
     })
-    //the character you choose has health, and attack strength
-    //the enemy has health and "counter" attack strength
-    //when you attack, your attack power amount is the number subtracted from your opponents health,
-    //after each attack, the enemy counters with their attack to player's health
 
-    //Whichever gets to 0 health first, loses
+    //the result of each round (attack button click) should be visible on result div
 
-    //background colors of each character will change depending on their location as default, player choice, and enemy
 
 }) //end of document
 
