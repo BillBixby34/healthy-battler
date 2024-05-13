@@ -78,6 +78,29 @@ $(document).ready(function() {
             createChar(arr[i], "#enemy");
         }
     };
+    //function for results to html
+    function resultMsg(message){
+        var result = $("#result");
+        result.append(message);
+
+    };
+    //clear messages function
+    function clearMsg(){
+        var clearResult = $(".results-panel");
+        clearResult.text("");
+    };
+    //restart function
+    function newGame (message){
+        
+        var gameLoad = $("<button>Restart</button>").on("click", function(){
+            location.reload();
+            // $(".fight-row").append(gameLoad);
+            // $(".fight-row").append(message);
+        })
+    };
+
+
+    
 
     //click function
 
@@ -103,10 +126,6 @@ $(document).ready(function() {
     });
 
 
-
-
-    //logic
-
     //once enemy is selected,
     $("#enemy").on("click", ".character", function(){
         var yourPick = $(this).attr("data-name");
@@ -118,20 +137,49 @@ $(document).ready(function() {
             $(this).remove();
         }
         
-        // $("#enemy").hide(defender);
     } ); //.enemies-row on "click"
 
 
     //the battle can begin!
     //need to increase turnCounter by1 each click
      //Whichever gets to 0 health first, loses
-
+    //NOT WORKING
     $("#attack-button").on("click", function(){
-        console.log("defender starts with " + defender.defense);
-        defender.defense -= attacker.offense * turnCounter;
-        console.log("the defender has " + defender.defense + " health left");
-        attacker.defense -= defender.revenge;
-        console.log("your player has " + attacker.defense + " health left");
+       
+        //if defender in area, message created and continue logic
+        if ($("#defender").children().length !== 0){
+            alert("attack button clicked")
+            let attackMsg = defender.name + " has been hit for " + attacker.offense * turnCounter + " damage!";
+            let revengeMsg = attacker.name + " has been counter hit for " + defender.revenge + " damage!";
+            clearMsg();
+
+            defender.defense -= attacker.offense * turnCounter;
+            attacker.defense -= defender.revenge;
+
+            if (defender.defense > 0) {
+                updateChar(defender, "#defender");
+                updateChar(attacker, "#player");
+                resultMsg(attackMsg);
+                resultMsg(revengeMsg);
+                if (attacker.defense <=0){
+                    //game ends and restart
+                    clearMsg();
+                    var loseMsg = attacker.name + "! Noooooooo!!"; 
+                    newGame(loseMsg)
+                }
+            } 
+            
+            else {
+                //means defender has no health and should be removed
+                $("#defender").empty();
+            }
+            turnCounter++;
+        }
+        else {
+            //if outside of these parameters
+            clearMsg();
+            resultMsg("Try something else");
+        }
     })
 
     //the result of each round (attack button click) should be visible on result div
