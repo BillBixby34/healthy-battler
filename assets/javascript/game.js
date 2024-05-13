@@ -79,17 +79,17 @@ $(document).ready(function() {
     };
 
     //function for results to html
-    let resultMsg = function (message){
+    var resultMsg = function (message){
         var resMessage = $("#result");
         //create div for message
         var newMessage = $("<div>").text(message);
         console.log(message)
         resMessage.append(newMessage);
     };
-    
+
     //clear messages function
     function clearMsg(){
-        var clearResult = $(".results-panel");
+        var clearResult = $("#result");
         clearResult.text("");
     };
     
@@ -101,8 +101,10 @@ $(document).ready(function() {
             
         })
         var newGameDiv = $("<div>").text(message);
-        $(".fight-row").append(gameLoad);
-        $("#winner").append(message);
+        $("body").append(gameLoad);
+        $("body").append(message);
+        // $(".fight-row").append(gameLoad);
+        // $("#winner").append(message);
     };
 
 
@@ -140,14 +142,11 @@ $(document).ready(function() {
             defender = characters[yourPick];
             updateChar(defender, "#defender");
             $(this).remove();
+            clearMsg();
         }
         
     } ); //.enemies-row on "click"
 
-
-    //the battle can begin!
-    //need to increase turnCounter by1 each click
-     //Whichever gets to 0 health first, loses
     
     $("#attack-button").on("click", function(){
        
@@ -170,7 +169,7 @@ $(document).ready(function() {
                 attacker.defense -= defender.revenge;
                 updateChar(attacker, "#player");
 
-                if (attacker.defense <=0){
+                if (attacker.defense <= 0){
                     //game ends, clear div and restart
                     clearMsg();
                     var loseMsg = attacker.name + "! Noooooooo!!"; 
@@ -184,6 +183,11 @@ $(document).ready(function() {
                 var gameStateMessage = "You have defeated " + defender.name + "! Now you can choose to fight another enemy.";
                 resultMsg(gameStateMessage);
                 killCounter++;
+
+                if (killCount >= combatants.length){
+                    clearMsg();
+                    newGame("You WIN");
+                }
             }
             turnCounter++;
         }
@@ -192,10 +196,10 @@ $(document).ready(function() {
             clearMsg();
             resultMsg("Try something else");
         }
-    })
+    });
 
     //the result of each round (attack button click) should be visible on result div
 
 
-}) //end of document
+}); //end of document
 
