@@ -42,8 +42,7 @@ $(document).ready(function() {
     // var enemyChoice = false;
     //setup to multiply for attack power
     var turnCounter = 1;
-
-    // var charRow = $(".character-row");
+    var killCounter = 0;
 
     //functions
     //create and sets each character into arena
@@ -78,25 +77,32 @@ $(document).ready(function() {
             createChar(arr[i], "#enemy");
         }
     };
-    //function for results to html
-    function resultMsg(message){
-        var result = $("#result");
-        result.append(message);
 
+    //function for results to html
+    let resultMsg = function (message){
+        var resMessage = $("#result");
+        //create div for message
+        var newMessage = $("<div>").text(message);
+        console.log(message)
+        resMessage.append(newMessage);
     };
+    
     //clear messages function
     function clearMsg(){
         var clearResult = $(".results-panel");
         clearResult.text("");
     };
+    
     //restart function
     function newGame (message){
         
         var gameLoad = $("<button>Restart</button>").on("click", function(){
             location.reload();
-            // $(".fight-row").append(gameLoad);
-            // $(".fight-row").append(message);
+            
         })
+        var newGameDiv = $("<div>").text(message);
+        $(".fight-row").append(gameLoad);
+        $("#winner").append(message);
     };
 
 
@@ -109,7 +115,7 @@ $(document).ready(function() {
         //if attacker not chosen
         if (!attacker) {
             attacker = characters[yourPick];
-            console.log("You chose " + attacker);
+           
             for (var key in characters){
 
                 if (key !== yourPick){
@@ -132,7 +138,6 @@ $(document).ready(function() {
             //no children of element
         if ($("#defender").children().length === 0){
             defender = characters[yourPick];
-            //console.log(defender + " should be moved");
             updateChar(defender, "#defender");
             $(this).remove();
         }
@@ -143,26 +148,30 @@ $(document).ready(function() {
     //the battle can begin!
     //need to increase turnCounter by1 each click
      //Whichever gets to 0 health first, loses
-    //NOT WORKING
+    
     $("#attack-button").on("click", function(){
        
         //if defender in area, message created and continue logic
         if ($("#defender").children().length !== 0){
-            alert("attack button clicked")
-            let attackMsg = defender.name + " has been hit for " + attacker.offense * turnCounter + " damage!";
-            let revengeMsg = attacker.name + " has been counter hit for " + defender.revenge + " damage!";
+            
+            var attackMsg = defender.name + " has been hit for " + attacker.offense * turnCounter + " damage!";
+            var revengeMsg = attacker.name + " has been counter hit for " + defender.revenge + " damage!";
             clearMsg();
 
             defender.defense -= attacker.offense * turnCounter;
-            attacker.defense -= defender.revenge;
+            
 
             if (defender.defense > 0) {
                 updateChar(defender, "#defender");
-                updateChar(attacker, "#player");
+                
                 resultMsg(attackMsg);
                 resultMsg(revengeMsg);
+
+                attacker.defense -= defender.revenge;
+                updateChar(attacker, "#player");
+
                 if (attacker.defense <=0){
-                    //game ends and restart
+                    //game ends, clear div and restart
                     clearMsg();
                     var loseMsg = attacker.name + "! Noooooooo!!"; 
                     newGame(loseMsg)
@@ -172,6 +181,9 @@ $(document).ready(function() {
             else {
                 //means defender has no health and should be removed
                 $("#defender").empty();
+                var gameStateMessage = "You have defeated " + defender.name + "! Now you can choose to fight another enemy.";
+                resultMsg(gameStateMessage);
+                killCounter++;
             }
             turnCounter++;
         }
