@@ -1,6 +1,19 @@
-/* ThIs will be placehOlder for characters */
-  /* I want to center image in the box */
-  
+
+
+  body {
+    font-family: "Metal Gear", sans-serif;
+    src:  url('../font/MetalGear.woff2') format('woff2'),
+         url("../font/MetalGear.woff") format('woff');
+        
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    color: whitesmoke;
+    background-image: url("../images/alex-voysey-mgs2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
 .character {
     
     display: inline-block;
