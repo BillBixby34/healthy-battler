@@ -184,7 +184,7 @@ $(document).ready(function() {
                 resultMsg(gameStateMessage);
                 killCounter++;
 
-                if (killCount >= combatants.length){
+                if (killCounter >= combatants.length){
                     clearMsg();
                     newGame("You WIN");
                 }
